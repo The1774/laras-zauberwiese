@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Bella und die Zauberwiese 🦄</title>
+
+    <!-- iPad/iPhone: als Vollbild-App vom Home-Bildschirm startbar -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bella">
+    <meta name="theme-color" content="#e9d5ff">
+    <link rel="apple-touch-icon" href="bella.png">
+
+    <!-- Verspielte Schrift "Fredoka" (optional, Fallback: Comic Sans MS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Rahmen, der das Spiel mittig hält und skaliert -->
+<div id="skalier-rahmen">
+    <div id="spiel-container">
+
+        <!-- Das eigentliche Spielfeld (feste interne Auflösung) -->
+        <canvas id="spiel-canvas" width="960" height="540"></canvas>
+
+        <!-- Kleine Knöpfe oben rechts: Pause + Ton -->
+        <div id="hud-knoepfe">
+            <button id="pause-knopf" title="Pause (P)">⏸️</button>
+            <button id="mute-knopf" title="Ton an/aus (M)">🔊</button>
+        </div>
+
+        <!-- ===== Startbildschirm ===== -->
+        <div class="overlay sichtbar" id="start-bildschirm">
+            <h1>🌸 Bella und die Zauberwiese 🌸</h1>
+            <!-- Bella wird hier live mit drawBella() gezeichnet (ui.js) -->
+            <canvas id="bella-vorschau" class="bella-gross" width="220" height="170"></canvas>
+            <button class="gross-knopf" id="spielen-knopf">Spielen ▶</button>
+            <p class="hinweis">⬅️ ➡️ laufen &nbsp;·&nbsp; Leertaste springen</p>
+            <p class="auswahl-titel">Schwierigkeit</p>
+            <div id="schwierigkeit-auswahl"></div>
+            <p class="auswahl-titel">Level</p>
+            <div id="level-auswahl"></div>
+            <p id="highscore-anzeige"></p>
+        </div>
+
+        <!-- ===== Pause ===== -->
+        <div class="overlay" id="pause-bildschirm">
+            <h2>Kleine Pause 💤</h2>
+            <button class="gross-knopf" id="weiter-spielen-knopf">Weiter ▶</button>
+            <button class="klein-knopf" id="pause-menue-knopf">Zum Menü 🏠</button>
+        </div>
+
+        <!-- ===== Level geschafft ===== -->
+        <div class="overlay" id="geschafft-bildschirm">
+            <h2>🎉 Super! Toll gemacht! 🎉</h2>
+            <p id="geschafft-text"></p>
+            <button class="gross-knopf" id="naechstes-level-knopf">Weiter ▶</button>
+        </div>
+
+        <!-- ===== "Nochmal?" – freundlich, kein hartes Game Over ===== -->
+        <div class="overlay" id="nochmal-bildschirm">
+            <h2>Ohje! 💜</h2>
+            <p>Bella braucht eine kleine Kuschelpause.<br>Möchtest du es nochmal versuchen?</p>
+            <button class="gross-knopf" id="nochmal-knopf">Nochmal spielen 🦄</button>
+            <button class="klein-knopf" id="nochmal-menue-knopf">Zum Menü 🏠</button>
+        </div>
+
+        <!-- ===== Touch-Steuerung (nur auf Touch-Geräten sichtbar) ===== -->
+        <div id="touch-steuerung">
+            <div class="touch-gruppe">
+                <button class="touch-knopf" id="touch-links">⬅️</button>
+                <button class="touch-knopf" id="touch-rechts">➡️</button>
+            </div>
+            <button class="touch-knopf touch-sprung" id="touch-sprung">⬆️</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Klassische Script-Tags in fester Reihenfolge – KEINE ES-Module,
+     damit das Spiel per Doppelklick (file://) ohne Server startet. -->
+<script src="js/config.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/input.js"></script>
+<script src="js/entities.js"></script>
+<script src="js/player.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+
+</body>
+</html>

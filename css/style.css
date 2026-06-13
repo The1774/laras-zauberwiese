@@ -1,0 +1,326 @@
+/* =====================================================
+   Bella und die Zauberwiese – Styling
+   Pastell, viel Lila und Pink, große runde Knöpfe.
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: linear-gradient(#e9d5ff, #fce7f3);
+    font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+    touch-action: manipulation; /* kein Doppeltipp-Zoom auf Tablets */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none; /* kein "Kopieren/Teilen"-Menü bei langem Tippen */
+    overscroll-behavior: none;   /* kein Gummiband-Wackeln beim Wischen (iOS) */
+}
+
+/* Hält das Spiel mittig; der Container wird per JS skaliert */
+#skalier-rahmen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Feste interne Größe – alles darin skaliert automatisch mit */
+#spiel-container {
+    position: relative;
+    width: 960px;
+    height: 540px;
+    flex: none;
+}
+
+#spiel-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(179, 136, 235, 0.45);
+}
+
+/* ---------- Pause-/Ton-Knöpfe oben rechts ---------- */
+
+#hud-knoepfe {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 6;
+}
+
+#hud-knoepfe button {
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(124, 58, 237, 0.25);
+}
+
+#hud-knoepfe button:active {
+    transform: scale(0.92);
+}
+
+/* ---------- Bildschirme / Overlays ---------- */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    background: rgba(255, 240, 250, 0.93);
+    border-radius: 16px;
+    z-index: 10;
+}
+
+.overlay.sichtbar {
+    display: flex;
+}
+
+h1 {
+    font-size: 42px;
+    color: #7c3aed;
+    text-shadow: 0 3px 0 #ffd6ec;
+}
+
+h2 {
+    font-size: 38px;
+    color: #7c3aed;
+}
+
+.overlay p {
+    font-size: 22px;
+    color: #9d5cc9;
+    line-height: 1.5;
+}
+
+.hinweis {
+    font-size: 17px !important;
+    opacity: 0.8;
+}
+
+.bella-gross {
+    font-size: 90px;
+    animation: winken 2s ease-in-out infinite;
+}
+
+@keyframes winken {
+    0%, 100% { transform: rotate(-8deg); }
+    50%      { transform: rotate(8deg) translateY(-10px); }
+}
+
+/* ---------- Startbildschirm kompakter (viele Knöpfe) ---------- */
+
+#start-bildschirm {
+    gap: 9px;
+}
+
+#start-bildschirm h1 {
+    font-size: 32px;
+}
+
+/* Vorschau-Bella kleiner anzeigen (interne Auflösung bleibt 220×170) */
+#bella-vorschau.bella-gross {
+    width: 150px;
+    height: 116px;
+}
+
+#start-bildschirm .gross-knopf {
+    padding: 12px 40px;
+    font-size: 24px;
+}
+
+#start-bildschirm .hinweis {
+    font-size: 15px !important;
+}
+
+/* ---------- Knöpfe ---------- */
+
+.gross-knopf {
+    font-family: inherit;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(#ff8fcf, #b388eb);
+    border: none;
+    border-radius: 40px;
+    padding: 16px 48px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #9d6fd6;
+}
+
+.gross-knopf:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #9d6fd6;
+}
+
+.klein-knopf {
+    font-family: inherit;
+    font-size: 18px;
+    color: #7c3aed;
+    background: #ffd6ec;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 28px;
+    cursor: pointer;
+}
+
+/* ---------- Auswahl (Schwierigkeit + Level) ---------- */
+
+.auswahl-titel {
+    margin: 4px 0 -2px;
+    font-size: 15px !important;
+    font-weight: 600;
+    color: #b388eb;
+    opacity: 0.9;
+}
+
+#schwierigkeit-auswahl {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.schwierigkeit-knopf {
+    font-family: inherit;
+    width: 82px;
+    height: 50px;
+    font-size: 22px;
+    color: #7c3aed;
+    background: white;
+    border: 3px solid #d8c7f0;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.schwierigkeit-knopf small {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.schwierigkeit-knopf:active {
+    transform: scale(0.93);
+}
+
+/* gewählte Stufe deutlich hervorheben */
+.schwierigkeit-knopf.aktiv {
+    border-color: #ff8fcf;
+    background: #ffe3f3;
+    box-shadow: 0 0 0 3px rgba(255, 143, 207, 0.35);
+}
+
+#level-auswahl {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 880px;
+}
+
+.level-knopf {
+    font-family: inherit;
+    width: 62px;
+    height: 62px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #7c3aed;
+    background: white;
+    border: 3px solid #ff8fcf;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.level-knopf small {
+    font-size: 9px;
+    font-weight: 400;
+}
+
+.level-knopf:not(.gesperrt):active {
+    transform: scale(0.93);
+}
+
+.level-knopf.gesperrt {
+    opacity: 0.5;
+    border-color: #d8c7f0;
+    cursor: default;
+}
+
+#highscore-anzeige {
+    font-size: 18px !important;
+    color: #b388eb;
+}
+
+/* ---------- Touch-Steuerung (nur auf Touch-Geräten) ---------- */
+
+#touch-steuerung {
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* etwas höher, damit der Sprung-Knopf nicht unter dem iPad-Home-Balken liegt */
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    display: none;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 5;
+    pointer-events: none; /* nur die Knöpfe selbst sind tippbar */
+}
+
+#touch-steuerung.aktiv {
+    display: flex;
+}
+
+.touch-gruppe {
+    display: flex;
+    gap: 16px;
+}
+
+.touch-knopf {
+    width: 90px;
+    height: 90px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    font-size: 40px;
+    pointer-events: auto;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.touch-knopf:active {
+    background: rgba(255, 214, 236, 0.85);
+}
+
+/* Der Sprung-Knopf ist extra groß – er ist am wichtigsten */
+.touch-sprung {
+    width: 110px;
+    height: 110px;
+    font-size: 50px;
+    background: rgba(255, 143, 207, 0.55);
+}

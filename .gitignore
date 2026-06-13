@@ -1,0 +1,9 @@
+# Nicht fürs Hosting nötig – nur lokale Entwicklungsordner
+.venv/
+.idea/
+__pycache__/
+main.py
+
+# Betriebssystem-Krimskrams
+.DS_Store
+Thumbs.db
